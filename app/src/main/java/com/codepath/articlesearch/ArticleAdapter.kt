@@ -13,7 +13,7 @@ import com.bumptech.glide.Glide
 const val ARTICLE_EXTRA = "ARTICLE_EXTRA"
 private const val TAG = "ArticleAdapter"
 
-class ArticleAdapter(private val context: Context, private val articles: List<Article>) :
+class ArticleAdapter(private val context: Context, private val articles: List<Flix>) :
     RecyclerView.Adapter<ArticleAdapter.ViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -31,20 +31,21 @@ class ArticleAdapter(private val context: Context, private val articles: List<Ar
     inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView),
         View.OnClickListener {
 
-        private val mediaImageView = itemView.findViewById<ImageView>(R.id.mediaImage)
-        private val titleTextView = itemView.findViewById<TextView>(R.id.mediaTitle)
-        private val abstractTextView = itemView.findViewById<TextView>(R.id.mediaAbstract)
+        private val mediaImageView = itemView.findViewById<ImageView>(R.id.movie_image)
+        private val titleTextView = itemView.findViewById<TextView>(R.id.movie_title)
+        private val abstractTextView = itemView.findViewById<TextView>(R.id.movie_description)
 
         init {
             itemView.setOnClickListener(this)
         }
 
-        fun bind(article: Article) {
-            titleTextView.text = article.headline?.main
-            abstractTextView.text = article.abstract
+        fun bind(article: Flix) {
+            titleTextView.text = article.title
+            abstractTextView.text = article.description
 
             Glide.with(context)
-                .load(article.mediaImageUrl)
+                .load("https://image.tmdb.org/t/p/w500/" + article.movieImageUrl)
+                .centerInside()
                 .into(mediaImageView)
         }
 

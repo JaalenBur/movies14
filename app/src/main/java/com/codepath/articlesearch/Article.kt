@@ -1,5 +1,6 @@
 package com.codepath.articlesearch
 import android.support.annotation.Keep
+import com.google.gson.annotations.SerializedName
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
@@ -13,47 +14,29 @@ data class SearchNewsResponse(
 @Keep
 @Serializable
 data class BaseResponse(
-    @SerialName("docs")
-    val docs: List<Article>?
+    @SerialName("results")
+    val docs: List<Flix>?
 )
-
 @Keep
 @Serializable
-data class Article(
-    @SerialName("web_url")
-    val webUrl: String?,
-    @SerialName("pub_date")
-    val pubDate: String?,
-    @SerialName("headline")
-    val headline: HeadLine?,
-    @SerialName("multimedia")
-    val multimedia: List<MultiMedia>?,
-    @SerialName("abstract")
-    val abstract: String?,
-    @SerialName("byline")
-    val byline: Byline?,
-) : java.io.Serializable {
-    val mediaImageUrl =
-        "https://www.nytimes.com/${multimedia?.firstOrNull { it.url != null }?.url ?: ""}"
-}
+data class Flix (
 
-@Keep
-@Serializable
-data class HeadLine(
-    @SerialName("main")
-    val main: String
-) : java.io.Serializable
 
-@Keep
-@Serializable
-data class Byline(
-    @SerialName("original")
-    val original: String? = null
-) : java.io.Serializable
+    @JvmField
+    @SerializedName("title")
+    var title: String? = null,
 
-@Keep
-@Serializable
-data class MultiMedia(
-    @SerialName("url")
-    val url: String?
-) : java.io.Serializable
+
+    @SerializedName("poster_path")
+    var movieImageUrl: String? = null,
+
+
+    @SerializedName("overview")
+    var description: String? = null,
+
+    @SerializedName("backdrop_path")
+    var backdrop: String? = null
+
+
+
+)
