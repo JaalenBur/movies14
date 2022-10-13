@@ -30,7 +30,18 @@ data class Flix (
     var description: String? = null,
 
     @SerialName("backdrop_path")
-    var backdrop: String? = null
+    var backdrop: String? = null,
+
+    @SerialName("vote_average")
+    var vote: String? = null,
+
+    @SerialName("release_date")
+    var release: String? = null,
+
+    @SerialName("original_language")
+    var language: String? = null
+
+
 
 
 
