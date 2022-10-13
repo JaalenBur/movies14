@@ -3,19 +3,14 @@ import android.support.annotation.Keep
 import com.google.gson.annotations.SerializedName
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
+import com.codepath.articlesearch.BaseResponse
 
-@Keep
-@Serializable
-data class SearchNewsResponse(
-    @SerialName("response")
-    val response: BaseResponse?
-)
 
 @Keep
 @Serializable
 data class BaseResponse(
     @SerialName("results")
-    val docs: List<Flix>?
+    val results: List<Flix>?
 )
 @Keep
 @Serializable
@@ -23,20 +18,20 @@ data class Flix (
 
 
     @JvmField
-    @SerializedName("title")
+    @SerialName("title")
     var title: String? = null,
 
 
-    @SerializedName("poster_path")
+    @SerialName("poster_path")
     var movieImageUrl: String? = null,
 
 
-    @SerializedName("overview")
+    @SerialName("overview")
     var description: String? = null,
 
-    @SerializedName("backdrop_path")
+    @SerialName("backdrop_path")
     var backdrop: String? = null
 
 
 
-)
+) : java.io.Serializable

@@ -6,9 +6,11 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.codepath.articlesearch.BuildConfig.API_KEY
 import com.codepath.articlesearch.databinding.ActivityMainBinding
 import com.codepath.asynchttpclient.AsyncHttpClient
 import com.codepath.asynchttpclient.callback.JsonHttpResponseHandler
+import kotlinx.serialization.decodeFromString
 import kotlinx.serialization.json.Json
 import okhttp3.Headers
 import org.json.JSONException
@@ -19,10 +21,12 @@ fun createJson() = Json {
     useAlternativeNames = false
 }
 
+private const val API_KEY = "a07e22bc18f5cb106bfe4cc1f83ad8ed"
+
 private const val TAG = "MainActivity/"
 private const val SEARCH_API_KEY = BuildConfig.API_KEY
 private const val ARTICLE_SEARCH_URL =
-    "https://api.themoviedb.org/3/movie/76341?api_key=${SEARCH_API_KEY}"
+    "https://api.themoviedb.org/3/movie/now_playing?api_key=${API_KEY}"
 
 class MainActivity : AppCompatActivity() {
     private lateinit var articlesRecyclerView: RecyclerView
@@ -64,7 +68,7 @@ class MainActivity : AppCompatActivity() {
                 try {
                     // TODO: Create the parsedJSON
                     val parsedJson = createJson().decodeFromString(
-                        SearchNewsResponse.serializer(),
+                        BaseResponse.serializer(),
                         json.jsonObject.toString()
                     )
 
@@ -72,7 +76,7 @@ class MainActivity : AppCompatActivity() {
 
 
                     // TODO: Save the articles and reload the screen
-                    parsedJson.response?.docs?.let { list ->
+                    parsedJson.results?.let { list ->
                         articles.addAll(list)
                         articleAdapter.notifyDataSetChanged()
                     }

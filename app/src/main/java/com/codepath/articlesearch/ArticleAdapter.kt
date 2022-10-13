@@ -50,10 +50,10 @@ class ArticleAdapter(private val context: Context, private val articles: List<Fl
         }
 
         override fun onClick(v: View?) {
-            val article = articles[absoluteAdapterPosition]
+            val flix = articles[absoluteAdapterPosition]
 
             val intent = Intent(context, DetailActivity::class.java)
-            intent.putExtra(ARTICLE_EXTRA, article)
+            intent.putExtra(ARTICLE_EXTRA, flix)
             context.startActivity(intent)
         }
     }
